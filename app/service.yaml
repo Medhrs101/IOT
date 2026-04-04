@@ -1,0 +1,13 @@
+apiVersion: v1 # Why? Uses the core stable API for networking.
+kind: Service # Why? Creates a permanent IP address so other parts of the cluster can find the Pods.
+metadata:
+  name: my-app-service # Why? The DNS name other pods will use to talk to your app.
+  namespace: dev # Why? Must be in the same namespace as the Deployment to see the Pods.
+spec:
+  selector:
+    app: my-app # Why? Directs traffic to any Pod wearing the "app: my-app" label.
+  ports:
+    - protocol: TCP # Why? Standard protocol for web traffic.
+      port: 80 # Why? The port the Service listens on.
+      targetPort: 80 # Why? The port the Service "forwards" traffic to on the Pod.
+  type: ClusterIP # Why? Standard internal-only IP; we use an Ingress to expose it to the world.
