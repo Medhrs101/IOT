@@ -10,4 +10,4 @@ spec:
     - protocol: TCP # Why? Standard protocol for web traffic.
       port: 80 # Why? The port the Service listens on.
       targetPort: 80 # Why? The port the Service "forwards" traffic to on the Pod.
-  type: ClusterIP # Why? Standard internal-only IP; we use an Ingress to expose it to the world.
+  type: LoadBalancer # Why? Standard internal-only IP; we use an Ingress to expose it to the world.
