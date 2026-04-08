@@ -1,20 +1,20 @@
-apiVersion: apps/v1 # Why? Defines the version of the Kubernetes API to use for this object.
-kind: Deployment # Why? Tells K8s to maintain a specific number of pod copies (restarts them if they crash).
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: my-app-deployment # Why? The unique name for this "worker" group in the cluster.
-  namespace: dev # Why? Part 3 requires separating apps into a 'dev' namespace for isolation.
+  name: wil-app
+  namespace: dev
 spec:
-  replicas: 1 # Why? Starts with 1 instance; Argo CD will scale this automatically if you change it in Git.
+  replicas: 1
   selector:
     matchLabels:
-      app: my-app # Why? The "glue" that tells this Deployment which Pods it is responsible for.
+      app: wil-app
   template:
     metadata:
       labels:
-        app: my-app # Why? The "ID Tag" attached to every Pod created by this deployment.
+        app: wil-app
     spec:
       containers:
-      - name: nginx # Why? Name of the container inside the Pod.
-        image: nginx:alpine # Why? A very small, lightweight web server image (best practice for K8s).
+      - name: wil-app-container
+        image: nginx:latest
         ports:
-        - containerPort: 80 # Why? The internal port the application is listening on inside the container.
+        - containerPort: 80
