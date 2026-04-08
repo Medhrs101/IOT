@@ -1,14 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wil-app-service
-  namespace: dev
+  name: wil-service
 spec:
-  type: NodePort
   selector:
-    app: wil-app
+    app: wil # Matches the Deployment's selector
   ports:
-    - protocol: TCP
-      port: 80          # Port inside the cluster
-      targetPort: 80    # Port on the pod
-      nodePort: 30080   # This matches your k3d mapping
+  - protocol: TCP
+    port: 8888 # Host port inside cluster (you can choose any available port)
+    targetPort: 8888  # Maps to the container port
+    nodePort: 30080
+  type: NodePort
